@@ -1,26 +1,18 @@
-from flask import Flask , request
-
-
+from flask import Flask
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def home():
-    glossa = request.headers.get('Accept-Language')
+    return "Πρόσθεσε το όνομά σου στο τέλος του URL!"
 
-    if 'el' in glossa.lower():
-        minima = "Γειά σου" 
-    else:
-        minima= "Hi"
-
-    
-            
+@app.route('/<onoma>')
+def greet(onoma):
     return f'''
-        <h1> {minima}</h1>
-        <p> Η γλώσσα του browser είναι {glossa}</p>
-        </body>
-        '''
+        <h1>Γεια σου, {onoma}!</h1>
+        <p>Αυτή η σελίδα δημιουργήθηκε ειδικά για σένα.</p>
+        <p>Δοκίμασε να αλλάξεις το όνομα στη διεύθυνση πάνω!</p>
+    '''
 
 if __name__ == "__main__":
     app.run(debug=True)
